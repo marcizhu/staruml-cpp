@@ -540,7 +540,16 @@ class CppCodeGenerator {
       } else if (elem.stereotype === 'destructor') {
         methodStr += '~'
       } else {
-        methodStr += ((returnTypeParam.length > 0) ? this.getType(returnTypeParam[0]) : 'void') + ' '
+        if (returnTypeParam.length > 0) {
+          var retType = this.getType(returnTypeParam[0])
+          if (retType === 'string' || retType === 'String') {
+            methodStr += 'std::string'
+          } else {
+            methodStr += retType
+          }
+        } else {
+          methodStr += 'void'
+        }
       }
 
       if (isCppBody) {
@@ -597,7 +606,10 @@ class CppCodeGenerator {
           methodStr += ' const'
         }
         methodStr += ';'
-        docs += '\n@return ' + returnType
+        if (returnTypeParam.length > 0) {
+          var returnType = this.getType(returnTypeParam[0])
+          docs += '\n@return ' + returnType
+        }
       }
       return '\n' + this.getDocuments(docs) + methodStr
     }
