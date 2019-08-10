@@ -567,11 +567,13 @@ class CppCodeGenerator {
             methodStr += indentLine + 'return false;'
           } else if (returnType === 'int' || returnType === 'long' || returnType === 'short' || returnType === 'byte') {
             methodStr += indentLine + 'return 0;'
-          } else if (returnType === 'double' || returnType === 'float') {
+          } else if (returnType === 'double') {
             methodStr += indentLine + 'return 0.0;'
+          } else if (returnType === 'float') {
+            methodStr += indentLine + 'return 0.0f;'
           } else if (returnType === 'char') {
             methodStr += indentLine + "return '0';"
-          } else if (returnType === 'string' || returnType === 'String') {
+          } else if (returnType === 'string' || returnType === 'String' || returnType === 'std::string') {
             methodStr += indentLine + 'return "";'
           } else if (returnType === 'void') {
             methodStr += indentLine + 'return;'
