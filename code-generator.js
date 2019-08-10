@@ -580,7 +580,6 @@ class CppCodeGenerator {
           } else {
             methodStr += indentLine + 'return null;'
           }
-          docs += '\n@return ' + returnType
         }
         methodStr += '\n}'
       } else {
@@ -592,6 +591,7 @@ class CppCodeGenerator {
           methodStr += ' = 0'
         }
         methodStr += ';'
+        docs += '\n@return ' + returnType
       }
       return '\n' + this.getDocuments(docs) + methodStr
     }
