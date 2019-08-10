@@ -560,7 +560,11 @@ class CppCodeGenerator {
 
         methodStr += specifier
         methodStr += elem.name
-        methodStr += '(' + inputParamStrings.join(', ') + ')' + ' {\n'
+        methodStr += '(' + inputParamStrings.join(', ') + ')'
+        if(elem.isQuery === true) {
+          methodStr += ' const'
+        }
+        methodStr += '\n{\n'
         if (returnTypeParam.length > 0) {
           var returnType = this.getType(returnTypeParam[0])
           if (returnType === 'boolean' || returnType === 'bool') {
@@ -589,6 +593,8 @@ class CppCodeGenerator {
           methodStr += ' final'
         } else if (elem.isAbstract === true) { // TODO 만약 virtual 이면 모두 pure virtual? 체크 할것
           methodStr += ' = 0'
+        } else if (elem.isQuery === true) {
+          methodStr += ' const'
         }
         methodStr += ';'
         docs += '\n@return ' + returnType
