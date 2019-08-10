@@ -535,7 +535,13 @@ class CppCodeGenerator {
         docs += '\n@param ' + inputParam.name
       }
 
-      methodStr += ((returnTypeParam.length > 0) ? this.getType(returnTypeParam[0]) : 'void') + ' '
+      if (elem.stereotype === 'constructor') {
+        // do nothing
+      } else if (elem.stereotype === 'destructor') {
+        methodStr += '~'
+      } else {
+        methodStr += ((returnTypeParam.length > 0) ? this.getType(returnTypeParam[0]) : 'void') + ' '
+      }
 
       if (isCppBody) {
         var telem = elem
