@@ -176,19 +176,19 @@ class CppCodeGenerator {
 
       codeWriter.writeLine('class ' + elem.name + finalModifier + writeInheritance(elem) + ' {')
       if (classfiedAttributes._public.length > 0) {
-        codeWriter.writeLine('public: ')
+        codeWriter.writeLine('public:')
         codeWriter.indent()
         write(classfiedAttributes._public)
         codeWriter.outdent()
       }
       if (classfiedAttributes._protected.length > 0) {
-        codeWriter.writeLine('protected: ')
+        codeWriter.writeLine('protected:')
         codeWriter.indent()
         write(classfiedAttributes._protected)
         codeWriter.outdent()
       }
       if (classfiedAttributes._private.length > 0) {
-        codeWriter.writeLine('private: ')
+        codeWriter.writeLine('private:')
         codeWriter.indent()
         write(classfiedAttributes._private)
         codeWriter.outdent()
