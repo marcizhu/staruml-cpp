@@ -296,13 +296,11 @@ class CppCodeGenerator {
    * @return {string}
    */
   writeHeaderSkeletonCode (elem, options, funct) {
-    var headerString = '_' + elem.name.toUpperCase() + '_H'
     var codeWriter = new codegen.CodeWriter(this.getIndentString(options))
     var includePart = this.getIncludePart(elem)
     codeWriter.writeLine(copyrightHeader)
     codeWriter.writeLine()
-    codeWriter.writeLine('#ifndef ' + headerString)
-    codeWriter.writeLine('#define ' + headerString)
+    codeWriter.writeLine('#pragma once')
     codeWriter.writeLine()
 
     if (includePart.length > 0) {
@@ -312,7 +310,6 @@ class CppCodeGenerator {
     funct(codeWriter, elem, this)
 
     codeWriter.writeLine()
-    codeWriter.writeLine('#endif //' + headerString)
     return codeWriter.getData()
   }
 
